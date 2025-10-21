@@ -1,7 +1,17 @@
-/* 2025-09-23 divinglog.js
+/* 2025-10-21 divinglog.js
+web-logbook, digital scuba diving logbook to web
+__author__ = "Ian Leiman"
+__copyright__ = "Copyright 2025, Ian Leiman"
+__license__ = "CC BY-NC-SA 4.0"
+__version__ = "rel1 0.1"
+__email__ = "ian.leiman@gmail.com"
+__status__ = "development"
+
+The file contains JavaScript functions to handle map display, navigation, 
+and gallery features for a web-based scuba diving logbook application.
 **********************************************************************************/
 
-// handle URL parameters
+// handle URL parameters, TODO: take these into account when loading the page
 const queryString = window.location.search;
 console.log(`queryString= ${queryString}`);
 const urlParams = new URLSearchParams(queryString);
