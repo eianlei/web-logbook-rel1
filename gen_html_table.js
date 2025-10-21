@@ -1,4 +1,13 @@
+/* web-logbook, digital scuba diving logbook to web
+__author__ = "Ian Leiman"
+__copyright__ = "Copyright 2025, Ian Leiman"
+__license__ = "CC BY-NC-SA 4.0"
+__version__ = "rel1 0.1"
+__email__ = "ian.leiman@gmail.com"
+__status__ = "development"
+*/
 // gen_html_table.js
+
 // Function to generate HTML table rows from an array of objects or fetch from a URL
 // and insert into a specified div element.
 async function generateHtmlTableRows(targetDivId, dataOrUrl) {

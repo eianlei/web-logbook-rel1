@@ -1,3 +1,11 @@
+""" web-logbook, digital scuba diving logbook to web
+__author__ = "Ian Leiman"
+__copyright__ = "Copyright 2025, Ian Leiman"
+__license__ = "CC BY-NC-SA 4.0"
+__version__ = "rel1 0.1"
+__email__ = "ian.leiman@gmail.com"
+__status__ = "development"
+"""
 import base64
 import os
 import re
@@ -6,7 +14,13 @@ from gallery_db import Gallery
 from gen_svg import gen_profile_svg
 
 
-def printDBdata(in_data):
+def printDBdata(in_data: dict) -> str:
+  """Generate HTML fieldsets for database entry details, excluding Comments, Profile, and Scan fields.
+    Args:
+        in_data: dict of database entry details
+    Returns:
+        html: str of HTML fieldsets
+    """  
   html = "<div class= 'flex2'>"
 
   for key, value in in_data.items():
@@ -27,7 +41,13 @@ def printDBdata(in_data):
   return html
 
 
-def hyperlink_urls(text):
+def hyperlink_urls(text: str) -> str:
+    """Convert URLs in the input text to HTML anchor tags.
+    Args:
+        text: str input text possibly containing URLs
+    Returns:
+        str with URLs converted to HTML anchor tags 
+    """
     # Regex pattern to match URLs
     url_pattern = re.compile(r'(https?://[^\s]+)')
     
@@ -38,7 +58,13 @@ def hyperlink_urls(text):
     )
 
 
-def printComments(in_data):
+def printComments(in_data: dict) -> str:
+    """Generate HTML fieldset for comments in the database entry.
+    Args:
+        in_data: dict of database entry details
+    Returns:
+        html: str of HTML fieldset for comments
+    """
     html = "<div class= 'flex3'>"
     if in_data["Comments"] == None:
         comment_txt = "<b>No comments</b>"

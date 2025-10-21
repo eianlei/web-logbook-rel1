@@ -1,4 +1,13 @@
-# 2025-05-15 dl6_db.py
+""" 2025-10-21 dl6_db.py
+web-logbook, digital scuba diving logbook to web
+__author__ = "Ian Leiman"
+__copyright__ = "Copyright 2025, Ian Leiman"
+__license__ = "CC BY-NC-SA 4.0"
+__version__ = "rel1 0.1"
+__email__ = "ian.leiman@gmail.com"
+__status__ = "development"
+"""
+
 """Object DL6DB stores all of DivingLog6 sqlite database tables defined in dl6_tables object
 functions to open the database and fetch all data to DL6DB
 """

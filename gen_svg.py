@@ -1,3 +1,11 @@
+""" web-logbook, digital scuba diving logbook to web
+__author__ = "Ian Leiman"
+__copyright__ = "Copyright 2025, Ian Leiman"
+__license__ = "CC BY-NC-SA 4.0"
+__version__ = "rel1 0.1"
+__email__ = "ian.leiman@gmail.com"
+__status__ = "development"
+"""
 import html
 import svg
 from textwrap import dedent

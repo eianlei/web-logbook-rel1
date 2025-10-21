@@ -1,10 +1,26 @@
-# 2025-09-11
-""" Handles the gallery.db database
+""" web-logbook, digital scuba diving logbook to web
+__author__ = "Ian Leiman"
+__copyright__ = "Copyright 2025, Ian Leiman"
+__license__ = "CC BY-NC-SA 4.0"
+__version__ = "rel1 0.1"
+__email__ = "ian.leiman@gmail.com"
+__status__ = "development"
+
+This Module Handles the gallery.db database
 """
 import sqlite3 
 from dl6_db import fetch_allof_table, create_connection
 
 class Gallery(object):
+    """Object Gallery stores the DivingLog6 gallery.db tables
+    Args:
+        file: file name of the database
+    Attributes:
+        g: List of Gallery table rows as dicts
+        index: dict of Gallery table rows by ID
+        v: List of Videos table rows as dicts
+        v_index: dict of Videos table rows by ID
+    """
     def __init__(self, file: str) -> None:
         self.file = file 
         self.g = []
@@ -13,6 +29,12 @@ class Gallery(object):
         self.v_index = {}
         
 def get_gallery(gallery: Gallery):
+    """get the gallery and videos tables from the gallery.db database
+    Args:
+        gallery: Gallery object
+    Returns:
+        success: bool
+    """
     connection: sqlite3.Connection | None
     connection = create_connection(gallery.file, "sql")
     if connection != None:
@@ -33,6 +55,13 @@ def get_gallery(gallery: Gallery):
     return
 
 def add_gallery2logbook(dl6db, gallery):
+    """add gallery info to the dl6db Logbook entries
+    Args:
+        dl6db: DL6DB object
+        gallery: Gallery object
+    Returns:
+        None
+    """
     for item in gallery.g:
         dive_number = int(item["ID"])
         if dive_number in dl6db.index["Logbook"]:

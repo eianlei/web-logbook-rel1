@@ -1,4 +1,14 @@
-# make floating point profile arrays of the DL6 strings
+""" web-logbook, digital scuba diving logbook to web
+__author__ = "Ian Leiman"
+__copyright__ = "Copyright 2025, Ian Leiman"
+__license__ = "CC BY-NC-SA 4.0"
+__version__ = "rel1 0.1"
+__email__ = "ian.leiman@gmail.com"
+__status__ = "development"
+"""
+
+from dl6_db import DL6DB
+
 
 def mkProfiles(profileInt: int, profile: str, profile2: str) -> dict:
     '''make floating point profile arrays of the DL6 strings to a dict
@@ -35,7 +45,14 @@ def mkProfiles(profileInt: int, profile: str, profile2: str) -> dict:
 
     return prof
 
-def diveProfile(dl6db, num_int):
+def diveProfile(dl6db: DL6DB, num_int: int) -> dict:
+    """get the profile dict for a given dive number integer from the dl6db object
+    Args:
+        dl6db: DL6DB object
+        num_int: dive number integer
+    Returns:
+        profile_dict: dict with timeSamples, depthProfile, tempProfile, pressureProfile lists
+    """
     if dl6db.index['Logbook'][num_int]['ProfileInt']:
         profile = dl6db.index['Logbook'][num_int]['Profile']
         profile2 = dl6db.index['Logbook'][num_int]['Profile2']
