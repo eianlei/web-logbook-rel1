@@ -1,3 +1,13 @@
+""" web-logbook, digital scuba diving logbook to web
+__author__ = "Ian Leiman"
+__copyright__ = "Copyright 2025, Ian Leiman"
+__license__ = "CC BY-NC-SA 4.0"
+__version__ = "rel1 0.1"
+__email__ = "ian.leiman@gmail.com"
+__status__ = "development"
+
+THis is the main script to generate a web logbook from a diving logbook database.
+"""
 import shutil
 import yaml
 import argparse
@@ -145,4 +155,6 @@ def main():
 
 
 if __name__ == "__main__":
+    """ Entry point of the script.
+    """
     main()
