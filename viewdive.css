@@ -1,0 +1,266 @@
+/* dlogview.css
+** last update 2025-09-08
+*/
+body {
+    font-family: Arial;
+    font-size: 12px;
+    height: 100%;
+    overflow: hidden;
+}
+#sitemap { height: 600px; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+
+th, td {
+  border: 1px solid #333;
+  padding: 8px;
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr.highlight {
+  background-color: yellow !important; 
+}
+
+
+table tr:hover {
+  background-color: #e6f7ff;
+}
+
+/* Sort arrows */
+th.sort-asc::after {
+  content: " ▲";
+  font-size: 0.8em;
+}
+
+th.sort-desc::after {
+  content: " ▼";
+  font-size: 0.8em;
+}
+
+svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#sitemap { height: 600px; }
+button:hover{
+    background-color: red;
+}
+
+#Logbook {
+  height: calc( 100vh - 40px);
+  overflow: scroll;
+  overscroll-behavior: contain ;
+  min-height:0;
+}
+#Dive {
+  height: calc( 100vh - 40px);
+  overflow: scroll;
+  overscroll-behavior: contain ;
+  min-height:0;
+}
+#Trip {
+  /* height: calc( 100vh - 60px); */
+  background-color: #f8dde9;
+  overflow: hidden;
+  min-height:0;
+}
+#trip_table {
+  height: calc( 100vh - 120px);
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: flex;
+  height: calc( 100vh - 30px);
+  margin-top: 30px;
+  /* border: 1px solid #ccc; */
+  overflow: hidden;
+}
+
+.container {
+  height: calc( 100vh - 100px);
+  width: 100%;
+  display: flex;
+  margin-top: 1px;
+  /* overflow: hidden; */
+  min-height:0;
+}
+.left {
+  width: 40%;
+  padding: 1rem;
+  overflow-y: auto;
+  background-color: #f0f8ff;
+  border-right: 1px solid #ccc;
+}
+.right {
+  width: 60%;
+  padding: 1rem;
+  overflow-y: auto;
+  background-color: #fefff0;
+  border-right: 1px solid #ccc;
+}
+.resizer {
+  width: 5px;
+  cursor: col-resize;
+  background-color: #aaa;
+}
+
+/* Responsive layout for screens smaller than 768px */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left,
+  .right {
+    width: 100%;
+    height: 50vh; /* Adjust height as needed */
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+  }
+}
+
+
+
+/* Style the tab */
+.tab {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 33px;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem 0px 1rem;
+  z-index: 1000;    
+
+  border: 1px solid #ccc;
+  background-color: yellow;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: white;
+  font-size: large;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  float: left;
+  border: 2px solid black;
+  outline-width: 2px;
+  cursor: pointer;
+  padding: 4px 6px 0px 6px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #5bf70dba;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #f0860cc3;
+}
+
+.button {
+    width: 100%;
+        display: inline-block;
+        padding: 1px 1px;
+        text-align: center;
+        text-decoration: none;
+        color: #ffffff;
+        background-color: #7aa8b7;
+        border-radius: 4px;
+        outline: none;
+        font-size: 12px;
+}
+.button:hover{
+    background-color: red;
+}
+
+
+.flex1 {display: flex;}
+.flex2 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.field_legend {font-size: 70%; color: blue;}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid blue;
+  border-bottom: 16px solid blue;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+body{
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+#profileCanvas {
+  background-color: whitesmoke;
+  border:1px solid #000000;
+}
+#controls_list {
+  background-color: #73f7c6;
+}
+#controls_log {
+  background-color: #f5d394;
+}
+/* this will align the main and animated text layers canvases over each other */
+#profileCanvasDIV {
+    position: relative;
+    width: 600px;
+    height: 300px;
+    margin-bottom: 5px;
+}
+#profileCanvasDIV canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#none{
+  background-color: #f4f81149;
+}
+
+
+
+.dive_link {
+  color: blue;
+  text-decoration: underline;
+}
+.dive_link:hover {
+  color: red;
+  
+}
+
+#About {
+  height: calc( 100vh - 45px);
+  overflow-y: auto;
+  background-color: #f0f8ff;
+  border-right: 1px solid #ccc;
+}

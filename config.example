@@ -1,0 +1,7 @@
+# example config.yaml
+---
+logbook_file: "/path-to-your-db/logbook.sql"
+out_directory: "/var/www/divelogs"
+gallery_use: false
+gallery_type: "database"
+gallery_db: "/path/to/your/gallery.db"
