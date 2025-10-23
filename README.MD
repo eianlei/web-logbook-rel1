@@ -55,9 +55,7 @@ Pages, or services like Netlify, Vercel, Cloudflare.
 ## Python Dependencies
 
 - Python 3.6 is minimum, verified to run on 3.14
-
 - PyYAML for reading the YAML configuration file
-
 - svg.py for producing dive profiles as SVG images
 
 Note that your web server does not need to run python, you can generate
@@ -315,7 +313,7 @@ table \"Gallery\", has columns:
 - Url, TEXT, url to a kuvat.fi gallery,
 
   - example:
-    \"https://leiman.kuvat.fi/kuvat/Sukellus-SCUBA/2015/2015-04-13+D0508+Dunraven\"
+    \"https://leiman.kuvat.fi/kuvat/Sukellus-SCUBA/2015/2015-04-13+D0508+Dunraven"
 
 - Date, TEXT, date of the dive in ISO format YYYY-MM-DD
 
