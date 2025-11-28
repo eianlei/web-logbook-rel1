@@ -188,6 +188,7 @@ correct location, which can be on another host.
 
     Create venv, install packages, run main.py
     # run the content update
+    python3 -m venv venv
     source venv/bin/activate
     pip install PyYAML
     pip install svg.py
