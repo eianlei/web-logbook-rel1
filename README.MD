@@ -81,10 +81,11 @@ It is possible to configure your web server to access directly the sqlite databa
 
 ## Python Dependencies
 
-- [Python](https://www.python.org/downloads/) 3.6 is minimum, verified to run on 3.14
-- ["PyYAML"](https://pyyaml.org/) for reading the [YAML](https://en.wikipedia.org/wiki/YAML) configuration file
-- ["svg.py"](https://github.com/orsinium-labs/svg.py) for producing dive profiles as [SVG images](https://en.wikipedia.org/wiki/SVG)
-- [charset_normalizer](https://charset-normalizer.readthedocs.io/) for handling UTF-16/UTF-8 character set interoperability
+- Python 3.6 is minimum, verified to run on 3.14
+
+- PyYAML for reading the YAML configuration file
+
+- svg.py for producing dive profiles as SVG images
 
 Note that your web server does not need to run python, you can generate
 the web site files with any host that can run python and then copy/sync
@@ -208,8 +209,9 @@ correct location, which can be on another host.
     cd /dirxxx/web-logbook-rel1
     git pull
     # edit config.yaml first! Continue after you have done that
-### create virtual environment, pip install libraries
-    ## Create venv, install packages, run main.py
+
+    Create venv, install packages, run main.py
+    # run the content update
     source venv/bin/activate
     pip install PyYAML
     pip install svg.py
