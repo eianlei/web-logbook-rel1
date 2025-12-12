@@ -1,4 +1,4 @@
-""" 2025-10-21 dl6_db.py
+""" 2025-12-10 dl6_db.py
 web-logbook, digital scuba diving logbook to web
 __author__ = "Ian Leiman"
 __copyright__ = "Copyright 2025, Ian Leiman"
@@ -33,6 +33,7 @@ class DL6DB(object):
         self.db_type = db_type
         self.tD: dict = {}
         self.index: dict = {}
+        self.LogID: dict = {}
         self.tables_keys: list = []
         self.dive_first_num: int = 0
         self.dive_last_num: int = 0
@@ -118,7 +119,8 @@ dl6_tables = [("Logbook", "Number", "Number"),
               ("Equipment", "Object", "ID"),
               ("Country", "Country", "ID"),
               ("City", "City", "ID"),
-              ("Brevets", "CertDate", "ID")
+              ("Brevets", "CertDate", "ID"),
+              ("UserDefined", "LogID", "ID")
               ]
 
 def get_dl6_db(db: DL6DB)-> bool:
@@ -161,6 +163,9 @@ def index_dl6_db(db: DL6DB):
         for row in db.tD[t]:
             index = row[idx]
             db.index[t][index] = row
+    for logrow in db.tD["Logbook"]:
+        db.LogID[logrow["ID"]] = logrow
+        logrow["HasMedia"] = False  # default no media
     print("indexing done")        
     return
 

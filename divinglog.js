@@ -45,18 +45,22 @@ fetch('about.html')
 
 // load summary tables, json files are in /json/ folder
 // then generate HTML table rows
-url = window.location.origin + '/json/Logbook_summary.json';
-generateHtmlTableRows("logbook_table", url);
-url = window.location.origin + '/json/Trip_summary.json';
-generateHtmlTableRows("trip_table", url);
-url = window.location.origin + '/json/Place_summary.json';
-generateHtmlTableRows("place_table", url);    
-url = window.location.origin + '/json/Buddy_summary.json';
-generateHtmlTableRows("buddy_table", url);    
-url = window.location.origin + '/json/Equipment_summary.json';
-generateHtmlTableRows("equipment_table", url);
-url = window.location.origin + '/json/Brevets_summary.json';
-generateHtmlTableRows("brevets_table", url);
+
+function getSubUrl(sub, filename) {
+    // Get current path and ensure trailing slash
+    let basePath = window.location.pathname;
+    if (!basePath.endsWith('/')) {
+        basePath = basePath.substring(0, basePath.lastIndexOf('/') + 1);
+    }
+    return basePath + sub + '/' + filename;
+}
+
+generateHtmlTableRows("logbook_table", getSubUrl('json', 'Logbook_summary.json'));
+generateHtmlTableRows("trip_table", getSubUrl('json', 'Trip_summary.json'));
+generateHtmlTableRows("place_table", getSubUrl('json', 'Place_summary.json'));    
+generateHtmlTableRows("buddy_table", getSubUrl('json', 'Buddy_summary.json'));    
+generateHtmlTableRows("equipment_table", getSubUrl('json', 'Equipment_summary.json'));
+generateHtmlTableRows("brevets_table", getSubUrl('json', 'Brevets_summary.json'));
 
 // if gallery use is disabled, hide Photos button
 if (typeof GALLERY_USE === 'undefined' || GALLERY_USE === false){
@@ -64,8 +68,8 @@ if (typeof GALLERY_USE === 'undefined' || GALLERY_USE === false){
   document.getElementById("PhotosButton").style.display = "none";
 } else {
   console.log("Gallery use is enabled");
-  url = window.location.origin + '/json/gallery.json'; 
-  get_gallery(url);
+  //url = window.location.origin + '/json/gallery.json'; 
+  get_gallery(getSubUrl('json', 'gallery.json'));
 } 
  
 

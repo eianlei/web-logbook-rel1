@@ -9,8 +9,9 @@ __status__ = "development"
 import base64
 import os
 import re
+from urllib.parse import quote, urlencode
 from dl6_db import DL6DB
-from gallery_db import Gallery
+#from gallery_db import Gallery
 from gen_svg import gen_profile_svg
 
 
@@ -27,8 +28,14 @@ def printDBdata(in_data: dict) -> str:
     if key == "Comments": continue
     if key.startswith("Profile"): continue
     if key.startswith("Scan"): continue
-    if key == "Url": 
-        value = f'<a href="{value}" target="_blank">media gallery</a>'
+    if key == "Url" and value != None and value != "": 
+        try:
+            #url = quote(value, safe=':/?&=')
+            url = fix_encoding(value)
+            value = f'<a href="{url}" target="_blank">media gallery</a>'
+        except:
+            value = "<invalid url>"
+            #print(f"invalid url {value}")
     if value == None:
         value = "<null>"
 
@@ -39,6 +46,24 @@ def printDBdata(in_data: dict) -> str:
   
   html += "</div>"
   return html
+
+
+from charset_normalizer import from_bytes
+
+def fix_encoding(text):
+    """
+    Detect and fix encoding issues for a mis-decoded string.
+    If the string looks like UTF-8 bytes decoded as Latin-1, repair it.
+    """
+    try:
+        # Try a quick heuristic: re-encode as Latin-1 and decode as UTF-8
+        repaired = text.encode('latin-1').decode('utf-8')
+        return repaired
+    except UnicodeError:
+        # If that fails, fall back to charset detection
+        raw_bytes = text.encode('utf-8', errors='ignore')
+        result = from_bytes(raw_bytes).best()
+        return str(result)
 
 
 def hyperlink_urls(text: str) -> str:

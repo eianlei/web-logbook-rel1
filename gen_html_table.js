@@ -93,7 +93,8 @@ function link_dive(number) {
 }
 
 function loadTableData(id, table) {
-    url = window.location.origin + `/html/${table}_${id}.html`;
+    //url = window.location.origin + `/html/${table}_${id}.html`;
+    url = url = getSubUrl('html', `${table}_${id}.html`);
     console.log(`Loading data for ${table} ID: ${id} from URL: ${url}`);
     loadHtmlIntoElement(url, `${table}_data`);
 }
@@ -121,7 +122,8 @@ var depth_points = [];
 function loadDiveData(number) {
     currently_shown_dive = Number(number);
 
-    url = window.location.origin + `/html/dive_${number}.html`;
+    //url = window.location.origin + `/html/dive_${number}.html`;
+    url = getSubUrl('html', `dive_${number}.html`);
     console.log(`Loading data for Dive: ${number} from URL: ${url}`);
     loadHtmlIntoElement(url, 'dive_data', true).then(() => {
   
@@ -241,6 +243,7 @@ async function loadHtmlIntoElement(url, elementId, loadScripts = false) {
     })
     .catch(error => {
       console.error("Error loading HTML:", error);
+      alert("gen_html_table.js at loadHtmlIntoElement: Error loading HTML:", error)
     });
 }
 

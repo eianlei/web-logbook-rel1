@@ -13,7 +13,7 @@ import yaml
 import argparse
 from pathlib import Path
 from dl6_db import get_dl6_db, DL6DB, dl6_tables, index_dl6_db, mdb_clean, tripMapBounds, xcheck_Logbook
-from gallery_db import add_gallery2logbook
+from gallery_db import Gallery, get_gallery, add_galleries, add_gallery2logbook
 from gen_details import html_all_details
 from pylist2js import pylist_to_js_array
 import os
@@ -50,21 +50,32 @@ def run(infile: str, outdirectory: str, gallery_db: str, gallery_use: bool = Fal
 
     ### gallery
     if gallery_use == True:
-        if gallery_type != "database":
-            print("Currently only 'database' gallery type is supported. Disabling gallery use.")
-            gallery_use = False 
-        else:
+        gallery_outfile = f"{outdirectory}{os.sep}json{os.sep}gallery.json"
+        
+        if gallery_type == "database":
             print(f"Using gallery database: {gallery_db}")
-            from gallery_db import Gallery, get_gallery
+
             # gallery_db from yaml config
             gallery = Gallery(gallery_db)
             get_gallery(gallery)
             add_gallery2logbook(dl6db, gallery)
             
             #dl6db.gallery_idlist = [item["ID"] for item in dl6db.gallery.g]
-            gallery_outfile = f"{outdirectory}{os.sep}json{os.sep}gallery.json"
+
             pylist_to_js_array(gallery.g, gallery_outfile, keys=["ID", "Url", "Date", "Sitename"])
             print(f'Wrote {gallery_outfile}')
+        elif gallery_type == "logbook":
+            print("reading galleries from Logbook UserDefined table")
+            gallery = Gallery(gallery_db)
+            add_galleries(dl6db, gallery=gallery)
+            pylist_to_js_array(gallery.g, gallery_outfile, keys=["ID", "Url", "Date", "Sitename"])
+            print(f'Wrote {gallery_outfile} and updated Logbook entries')
+
+        else:
+            print(f"unknown gallery_type {gallery_type}. Disabling gallery use.")
+            gallery_use = False     
+    else:
+        print("Gallery use disabled")
 
     tables = [
         {"name": "Logbook",   "cols": [ "Number","Divedate","Entrytime","Place","Divetime","Depth", "Buddy"]},
@@ -94,7 +105,7 @@ def run(infile: str, outdirectory: str, gallery_db: str, gallery_use: bool = Fal
     
     # copy static files
     static_files = [
-        "logbook.html",
+        "index.html",
         "about.html",
         "favicon.ico",
         ##"config.js", # dynamically generated

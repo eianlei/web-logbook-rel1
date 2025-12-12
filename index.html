@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- web-logbook, digital scuba diving logbook to web
+__author__ = "Ian Leiman"
+__copyright__ = "Copyright 2025, Ian Leiman"
+__license__ = "CC BY-NC-SA 4.0"
+__version__ = "rel1 0.1"
+__email__ = "ian.leiman@gmail.com"
+__status__ = "development"
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WEB Diving Logbook (dev v 2025-10-06)</title>
+    <link rel="stylesheet" href="viewdive.css">
+    <link rel="stylesheet" href="leaflet.css">
+
+</head>
+<body>
+<!-- Tab links -->
+<div class="tab">
+  <button id= "LogbookButton" class="tablinks" onclick="openTab(event, 'Logbook')">Logbook</button>
+  <button id= "DiveButton" class="tablinks" onclick="openTab(event, 'Dive')">Dive</button>
+  <button id= "MapButton" class="tablinks" onclick="openTab(event, 'Map')">Map</button>  
+  <button id= "PhotosButton" class="tablinks" onclick="openTab(event, 'Photos')">Photos</button>  
+  <button id= "TripButton" class="tablinks" onclick="openTab(event, 'Trip')">Trips</button>
+  <button id= "PlaceButton" class="tablinks" onclick="openTab(event, 'Place')">Places</button>
+  <button id= "BuddyButton" class="tablinks" onclick="openTab(event, 'Buddy')">Buddies</button>  
+  <button id= "EquipmentButton" class="tablinks" onclick="openTab(event, 'Equipment')">Equipment</button>
+  <button id= "BrevetsButton" class="tablinks" onclick="openTab(event, 'Brevets')">Brevets</button>  
+  <button id= "AboutButton" class="tablinks" onclick="openTab(event, 'About')">About</button>  
+</div>
+
+<!-- Tab content ------------------------------------------------>
+<!-- Logbook ------------------------------------------------>
+<div id="Logbook" class="tabcontent">
+  <h1>Logbook</h1>
+  <div id="logbook_table" class="display">
+  </div>
+</div>
+<!-- Map ------------------------------------------------>
+<div id="Map" class="tabcontent" style="display: none;">
+    <div id="sitemap" > Map
+    </div>  
+</div>
+<!-- Dive ------------------------------------------------>
+<div id="Dive" class="tabcontent" style="display: none;">
+    <div id="dive_data" >
+        <p>Select any dive from the logbook table to view details here.</p>
+    </div>
+</div>
+
+<!-- Trip ------------------------------------------------>
+<div id="Trip" class="tabcontent" style="display: none;">
+  <h2>Trips</h2>
+  <div class="container">
+    <div  class="left">
+      <div id="trip_table" ></div>
+    </div>
+    <div class="resizer"></div>
+    <div class="right" id="trip_data">
+      <p>Select any trip from the table on left side to view details here.</p>
+    </div> 
+  </div>
+</div> 
+</div>
+
+<!-- Places ------------------------------------------------>
+<div id="Place" class="tabcontent" style="display: none;">
+  <h2>Places</h2>
+  <div class="container">
+    <div  class="left">
+      <div id="place_table" ></div>
+
+    </div>
+    <div class="resizer"></div>
+    <div class="right" id="place_data">
+      <p>Select any dive PLACE from the table on left side to view details here.</p>
+    </div> 
+  </div>
+</div>
+
+<!-- Buddies ------------------------------------------------>
+<div id="Buddy" class="tabcontent" style="display: none;">
+  <h2>Buddies</h2>
+  <div class="container">
+    <div  class="left">
+      <div id="buddy_table" ></div>
+
+    </div>
+    <div class="resizer"></div>
+    <div class="right" id="buddy_data">
+      <p>Select any BUDDY from the table on left side to view details here.</p>
+    </div> 
+  </div>
+</div>
+
+<!-- EQUIPMENT ------------------------------------------------>
+<div id="Equipment" class="tabcontent" style="display: none;">
+  <h2>Equipment</h2>
+  <div class="container">
+    <div  class="left">
+      <div id="equipment_table" ></div>
+
+    </div>
+    <div class="resizer"></div>
+    <div class="right" id="equipment_data">
+      <p>Select any Equipment from the table on left side to view details here.</p>
+    </div> 
+  </div>
+</div>
+
+<!-- Brevets ------------------------------------------------>
+<div id="Brevets" class="tabcontent" style="display: none;">
+  <h2>Brevets (Certification cards)</h2>
+  <div class="container">
+    <div  class="left">
+      <div id="brevets_table" ></div>
+
+    </div>
+    <div class="resizer"></div>
+    <div class="right" id="brevets_data">
+      <p>Select any BREVET from the table on left side to view details here.</p>
+    </div> 
+  </div>
+</div>
+
+<!-- Photos ------------------------------------------------>
+<div id="Photos" class="tabcontent" style="display: none;">
+  <h2 id="gallery_h2">Photos and videos from dives</h2>
+      <button onclick="newGalleryPage()">OPEN GALLERY</button>
+        <span>select dive: </span>
+        <input type="number" id="galleryNumber" min="1" onchange="galleryNumber()"> 
+  <div id="gallery_container">
+    <p>Select a dive number to view photos or click PHOTOS button in Dive view</p>
+  </div>
+</div>
+
+<!-- About ------------------------------------------------>
+<div id="About" class="tabcontent" style="display: none;">
+  <div id="about_container">
+    <p>about.html should have been loaded here, if not shown then there was an error</p>
+  </div>
+</div>
+
+</body>
+<!-- end of body ------------------------------------------------>
+<script src="config.js"></script>
+<script src="leaflet.js"></script>
+<script src="gen_html_table.js"></script>
+<script src="divinglog.js"></script>
+<script src="sitemap.js"></script>
+<script>
+    console.log("logbook.html loaded, gallery use: ", GALLERY_USE);
+    document.getElementById("LogbookButton").click();
+</script>
+</html>

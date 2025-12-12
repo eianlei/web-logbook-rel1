@@ -9,7 +9,8 @@ __status__ = "development"
 This Module Handles the gallery.db database
 """
 import sqlite3 
-from dl6_db import fetch_allof_table, create_connection
+from dl6_db import DL6DB, fetch_allof_table, create_connection
+from gen_details import fix_encoding
 
 class Gallery(object):
     """Object Gallery stores the DivingLog6 gallery.db tables
@@ -54,7 +55,7 @@ def get_gallery(gallery: Gallery):
         return False      
     return
 
-def add_gallery2logbook(dl6db, gallery):
+def add_gallery2logbook(dl6db: DL6DB, gallery: Gallery):
     """add gallery info to the dl6db Logbook entries
     Args:
         dl6db: DL6DB object
@@ -70,7 +71,42 @@ def add_gallery2logbook(dl6db, gallery):
     for dive in dl6db.tD["Logbook"]:
         if "HasMedia" not in dive.keys():
             dive["HasMedia"] = False
-
- 
     return
+
+def add_galleries(dl6db: DL6DB, gallery: Gallery):
+    """add gallery info from Logbook UserDefined table to the dl6db Logbook entries
+    Args:
+        dl6db: DL6DB object
+    """    
+    if "UserDefined" not in dl6db.tD.keys():
+        print("No UserDefined table in DL6DB, cannot add galleries")
+        return
+    if "GalleryUrl" not in dl6db.tD["UserDefined"][0].keys():
+        print("No GalleryUrl field in UserDefined table, cannot add galleries")
+        return
+    for item in dl6db.tD["UserDefined"]:
+        log_id = int(item["LogID"])
+        if log_id in dl6db.LogID:
+            if item["GalleryUrl"] != None and item["GalleryUrl"] != "":
+                dl6db.LogID[log_id]["HasMedia"] = True
+                dl6db.LogID[log_id]["Url"] = item["GalleryUrl"] 
+                fix_url = fix_encoding(item["GalleryUrl"] )
+                gitem = {
+                    "ID": dl6db.LogID[log_id]["Number"],
+                    "Url": fix_url,
+                    "Date": dl6db.LogID[log_id]["Divedate"],
+                    "Sitename": dl6db.LogID[log_id]["Place"]
+                }
+                gallery.g.append(gitem)
+                gallery.index[int(gitem["ID"])] = gitem
+            else:
+                dl6db.LogID[log_id]["HasMedia"] = False
+        else:
+            continue    
+            
+    for dive in dl6db.tD["Logbook"]:
+        if "HasMedia" not in dive.keys():
+            dive["HasMedia"] = False
+    return    
+        
     
