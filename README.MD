@@ -81,11 +81,10 @@ It is possible to configure your web server to access directly the sqlite databa
 
 ## Python Dependencies
 
-- Python 3.6 is minimum, verified to run on 3.14
-
-- PyYAML for reading the YAML configuration file
-
-- svg.py for producing dive profiles as SVG images
+- [Python](https://www.python.org/downloads/) 3.6 is minimum, verified to run on 3.14
+- ["PyYAML"](https://pyyaml.org/) for reading the [YAML](https://en.wikipedia.org/wiki/YAML) configuration file
+- ["svg.py"](https://github.com/orsinium-labs/svg.py) for producing dive profiles as [SVG images](https://en.wikipedia.org/wiki/SVG)
+- [charset_normalizer](https://charset-normalizer.readthedocs.io/) for handling UTF-16/UTF-8 character set interoperability
 
 Note that your web server does not need to run python, you can generate
 the web site files with any host that can run python and then copy/sync
@@ -152,11 +151,13 @@ main.py reads the configuration file config.yaml, where you configure:
 ### out_directory
 
 After each run of \"python main.py\", the following files and
-subdirectories are created. Ideally these would go directly to your web
-server root. But you can of course also transfer or sync them to the
+subdirectories are created to **out_directory**. Ideally these would go directly to your web
+server root if running python on the same host that serves the web site. But you can of course also transfer or sync them to the
 correct location, which can be on another host.
 
-    ├── logbook.html 
+If hosting on Github pages, you must have index.html. GitHub Pages requires this file as the entry point for your website. Without it, the site will not display correctly or may show a 404 error. The easiest way to upload files to GitHub pages is using git itself.
+
+    ├── index.html 
     ├── favicon.ico
     ├── MapPinPlace.png
     ├── viewdive.css
@@ -181,7 +182,7 @@ correct location, which can be on another host.
     │   ├── Place_summary.json
     │   └── Trip_summary.json
 
-- **logbook.html** is the main page, it requires the
+- **index.html** is the main page, it requires the
   - **css** style files and
   - **javascript** js files that provide interactivity to this Single Page
     Application (SPA)
@@ -199,6 +200,7 @@ correct location, which can be on another host.
   
 
 ### git-clone web-logbook-rel1
+Note: if using Github pages, be sure that the **out_directory** will not be part of this same git repo. 
 
     # log into server
     ssh yourserver
@@ -209,9 +211,8 @@ correct location, which can be on another host.
     cd /dirxxx/web-logbook-rel1
     git pull
     # edit config.yaml first! Continue after you have done that
-
-    Create venv, install packages, run main.py
-    # run the content update
+### create virtual environment, pip install libraries
+    ## Create venv, install packages, run main.py
     source venv/bin/activate
     pip install PyYAML
     pip install svg.py
@@ -232,7 +233,7 @@ Assuming your site was generated to directory output
 
 You can now browse the web-logbook by
 
-<http://127.0.0.1:8888/logbook.html>
+<http://127.0.0.1:8888/index.html>
 
 # Hosting web-logbook on GitHub pages
 web-logbook can be hosted on GitHub pages for free if you have a Github account. 
@@ -308,7 +309,7 @@ Then configure /etc/apache2/sites-available/divelogs.yourdomain.com.conf
             ServerName divelogs.yourdomain.com
             DocumentRoot /var/www/divelogs
             <Directory /var/www/divelogs/>
-                DirectoryIndex logbook.html
+                DirectoryIndex index.html
                 Options -Indexes +FollowSymLinks +MultiViews
                 AllowOverride All
                 Require all granted
